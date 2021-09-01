@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+    <!-- добавить tools showIn-->
+
+    <!-- добавить пункты меню-->
+    <item android:title="@string/advert_cat1">
+        <menu>
+            <item android:title="@string/advert_my_ads"
+                android:id="@+id/id_my_ads"/>
+            <item android:title="@string/advert_car"
+                android:id="@+id/id_car"/>
+            <item android:title="@string/advert_pc"
+                android:id="@+id/id_pc"/>
+            <item android:title="@string/advert_smartphones"
+                android:id="@+id/id_smartphones"/>
+            <item android:title="@string/advert_home_tech"
+                android:id="@+id/id_home_tech"/>
+        </menu>
+    </item>
+
+    <item android:title="@string/advert_cat2">
+        <menu>
+            <item android:title="@string/ac_sign_up"
+                android:id="@+id/id_difn_up"/>
+            <item android:title="@string/ac_sign_in"
+                android:id="@+id/ac_sign_in"/>
+            <item android:title="@string/ac_sign_out"
+                android:id="@+id/ac_sign_out"/>
+
+        </menu>
+    </item>
+
+</menu>

@@ -1,0 +1,18 @@
+<resources>
+    <string name="app_name">Доска объявлений</string>
+    <!-- Drawer menu-->
+    <string name="advert_cat1">Объявления</string>
+    <string name="advert_my_ads">Мои объявления</string>
+    <string name="advert_car">Машины</string>
+    <string name="advert_pc">Компьютеры</string>
+    <string name="advert_smartphones">Смартфоны</string>
+    <string name="advert_home_tech">Бытовая техника</string>
+
+    <string name="advert_cat2">Аккаунт</string>
+    <string name="ac_sign_in">Вход</string>
+    <string name="ac_sign_up">Регистрация</string>
+    <string name="ac_sign_out">Выход</string>
+
+
+
+</resources>
