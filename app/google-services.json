@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "485553158381",
+    "project_id": "callboard01",
+    "storage_bucket": "callboard01.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:485553158381:android:f25ee98c5c4bba88faf4e4",
+        "android_client_info": {
+          "package_name": "chigovv.com.callboard"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "485553158381-9o42elv2ng34o6l4nrjr9d7e1m56hiiu.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDGJYsDawZc4cyArVZngSnwEas8rto2gDY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "485553158381-9o42elv2ng34o6l4nrjr9d7e1m56hiiu.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
