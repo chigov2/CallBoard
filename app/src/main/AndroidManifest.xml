@@ -11,6 +11,10 @@
 
         android:theme="@style/Theme.NoActionBar">
         <!--убрать action bar-->
+
+        <!--чтобы добавить custom action bar(іерхнюю панель) - создаем активити, которая будет внедряться в main activity
+
+        -->
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

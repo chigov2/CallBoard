@@ -11,6 +11,12 @@
     <!-- необходимо добавить свойства т.к. изменили на Drawer layout
     чтобы по умолчанию был выдвинутый tools openDrawer-->
 
+    <!-- insert main_content(который будет содержать action bar  и основной контент в последующем)....-->
+    <include
+        layout="@layout/main_content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
     <!-- когда добавили Navigation view также надо добавить атрибуты - не match parent а wrap content - по ширине контента
     и указать меню, которое будет показываться в navigation view. и добавить Gravity and fitSystem window
     -->
@@ -20,11 +26,10 @@
         android:layout_height="match_parent"
         android:layout_gravity="start"
         android:fitsSystemWindows="true"
+        android:visibility="visible"
         app:headerLayout="@layout/nav_header_main"
         app:menu="@menu/drawer_main_menu" />
     <!-- чтобы создать верхний хедер - надо создать отдельный layout nav_header_main
     -->
-
-
 </androidx.drawerlayout.widget.DrawerLayout>
 
