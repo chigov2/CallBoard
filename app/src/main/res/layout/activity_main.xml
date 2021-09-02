@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/drawer_layout"
+    android:id="@+id/drawerLayout"
     android:fitsSystemWindows="true"
     tools:openDrawer="start"
     tools:context=".MainActivity">
@@ -15,7 +15,8 @@
     <include
         layout="@layout/main_content"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent"
+        android:id="@+id/mainContent"/>
 
     <!-- когда добавили Navigation view также надо добавить атрибуты - не match parent а wrap content - по ширине контента
     и указать меню, которое будет показываться в navigation view. и добавить Gravity and fitSystem window
