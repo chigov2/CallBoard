@@ -7,6 +7,7 @@ import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.core.view.GravityCompat
 import chigovv.com.callboard.databinding.ActivityMainBinding
+import chigovv.com.callboard.dialoghelper.DialogHelper
 import com.google.android.material.navigation.NavigationView
 
 
@@ -14,6 +15,9 @@ class MainActivity : AppCompatActivity(),NavigationView.OnNavigationItemSelected
     //binding
     //private var rootElement:ActivityMainBinding? = null
     private lateinit var rootElement:ActivityMainBinding
+
+    //Dialog helper
+    private val dialogHelper = DialogHelper(this)
 
     //добавляем слушатель нажатий для меню
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -47,7 +51,10 @@ class MainActivity : AppCompatActivity(),NavigationView.OnNavigationItemSelected
             R.id.id_pc -> {Toast.makeText(this,"Pressed id_pc",Toast.LENGTH_SHORT).show()}
             R.id.id_smartphones -> {Toast.makeText(this,"Pressed id_smartphones",Toast.LENGTH_SHORT).show()}
             R.id.id_home_tech -> {Toast.makeText(this,"Pressed id_home_tech",Toast.LENGTH_SHORT).show()}
-            R.id.ac_sign_up -> {Toast.makeText(this,"Pressed ac_sign_up",Toast.LENGTH_SHORT).show()}
+            R.id.ac_sign_up -> {
+                //Toast.makeText(this,"Pressed ac_sign_up",Toast.LENGTH_SHORT).show()
+                dialogHelper.createSignDialog()
+            }
             R.id.ac_sign_in -> {Toast.makeText(this,"Pressed ac_sign_in",Toast.LENGTH_SHORT).show()}
             R.id.ac_sign_out -> {Toast.makeText(this,"Pressed ac_sign_out",Toast.LENGTH_SHORT).show()}
         }
