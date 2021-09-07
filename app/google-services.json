@@ -7,12 +7,20 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:485553158381:android:f25ee98c5c4bba88faf4e4",
+        "mobilesdk_app_id": "1:485553158381:android:52c0aa566bde91a7faf4e4",
         "android_client_info": {
           "package_name": "chigovv.com.callboard"
         }
       },
       "oauth_client": [
+        {
+          "client_id": "485553158381-2kpcuc14afbgnpti8gct2fapfj6amflj.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "chigovv.com.callboard",
+            "certificate_hash": "6d53394411f589d8731ae7a4adc0c21e0badb316"
+          }
+        },
         {
           "client_id": "485553158381-9o42elv2ng34o6l4nrjr9d7e1m56hiiu.apps.googleusercontent.com",
           "client_type": 3
