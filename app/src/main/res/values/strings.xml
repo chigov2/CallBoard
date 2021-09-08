@@ -18,6 +18,8 @@
 
     <!-- Sign-->
     <string name="email_hint">E-mail</string>
+    <string name="email_reset_pass_was_sent">Reset E-mail was sent!</string>
+    <string name="dialog_reset_email_message">Для восстановления пароля введите e-mail</string>
     <string name="password_hint">Password</string>
     <string name="sign_up_action">Зарегистрироваться</string>
     <string name="sign_in_action">Войти</string>
