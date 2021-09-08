@@ -1,7 +1,9 @@
 package chigovv.com.callboard
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.MenuItem
 import android.widget.TextView
 import android.widget.Toast
@@ -10,9 +12,13 @@ import androidx.core.view.GravityCompat
 import chigovv.com.callboard.databinding.ActivityMainBinding
 import chigovv.com.callboard.dialoghelper.DialogConst
 import chigovv.com.callboard.dialoghelper.DialogHelper
+import chigovv.com.callboard.dialoghelper.GoogleAccConst
+import com.google.android.gms.auth.api.signin.GoogleSignIn
+import com.google.android.gms.common.api.ApiException
 import com.google.android.material.navigation.NavigationView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
+import com.google.firebase.auth.GoogleAuthProvider
 
 
 class MainActivity : AppCompatActivity(),NavigationView.OnNavigationItemSelectedListener {
@@ -36,6 +42,28 @@ class MainActivity : AppCompatActivity(),NavigationView.OnNavigationItemSelected
         setContentView(rootElement.root)
         init()
     }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        if(requestCode == GoogleAccConst.GOOGLE_SIGN_IN_REQUEST_CODE) {
+            //Log.d("MyLog", "Sign in result")
+            val task = GoogleSignIn.getSignedInAccountFromIntent(data)
+            try {
+                val account = task.getResult(ApiException::class.java)
+                //есть аккаунт. теперь из него надо достать токен
+                if (account !=null)
+                {
+                    Log.d("MyLog", "API error: 3")
+                    dialogHelper.accHelper.signInFirebaseWithGoogle(account.idToken)
+                    Log.d("MyLog", "API error: 5")
+                }
+
+            }catch (e:ApiException){
+                Log.d("MyLog", "API error: ${e.message}")
+            }
+        }
+        super.onActivityResult(requestCode, resultCode, data)
+    }
+
     override fun onStart(){
         super.onStart()
         uiUpdate(mAuth.currentUser)

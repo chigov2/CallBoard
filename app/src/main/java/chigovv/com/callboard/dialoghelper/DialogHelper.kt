@@ -17,7 +17,7 @@ import chigovv.com.callboard.databinding.SignDialogBinding
 class DialogHelper(act:MainActivity) {
     private val act = act
 
-    private val accHelper = AccountHelper(act)
+    val accHelper = AccountHelper(act)
 
     //передаем индекс для выбора - вход/регистрация
     @SuppressLint("StringFormatInvalid")
@@ -37,13 +37,16 @@ class DialogHelper(act:MainActivity) {
         setDialogState(index,rootDialogElement)
 
         val dialog = builder.create()
-
+        //слушатели для кнопок
         rootDialogElement.btSignUpIn.setOnClickListener{
             setOnClickSignUpIn(index,rootDialogElement,dialog)
         }
 
         rootDialogElement.btForgetPass.setOnClickListener{
             setOnClickResetPassword(rootDialogElement,dialog)
+        }
+        rootDialogElement.btGoogleSignIn.setOnClickListener{
+            accHelper.SignInWithGoogle()
         }
         //рисуем на экране
         dialog.show()
