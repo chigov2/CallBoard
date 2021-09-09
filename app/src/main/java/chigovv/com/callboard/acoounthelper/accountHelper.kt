@@ -18,7 +18,7 @@ class AccountHelper(act: MainActivity) {
     private val act = act
 
     //val sigbInRequestCode = 132
-    private lateinit var signInClient: GoogleSignInClient //google client
+    private lateinit var  signInClient: GoogleSignInClient //google client
 
     //регистрация по адресу email
     fun signUpWithEmail(email: String, password: String) {
@@ -93,13 +93,14 @@ class AccountHelper(act: MainActivity) {
                 if (task.isSuccessful) {
                     act.uiUpdate(task.result?.user) //показываем e-mail по которому зарегистрировались
                 } else {
-
+                    Log.d("MyLog", "sign In With Email Exeption3:: ${task.exception}")
 
                     if (task.exception is FirebaseAuthInvalidCredentialsException) {
                         Log.d("MyLog", "sign In With Email Exeption:: " + task.exception)
                         val exception = task.exception as FirebaseAuthInvalidCredentialsException
+                        //Log.d("MyLog", "sign In With Email Exeption2:: ${exception.errorCode}")
+                        //Log.d("MyLog", "sign In With Email Exeption:: ${exception.errorCode}" )
 
-                        // Log.d("MyLog", "sign In With Email Exeption:: ${exception.errorCode}" )
                         if (exception.errorCode == FireBaseConstants.ERROR_INVALID_EMAIL) {
                             //здесь будем соединять gmail and e-mail
                             Toast.makeText(act,FireBaseConstants.ERROR_INVALID_EMAIL,Toast.LENGTH_SHORT).show()
@@ -110,6 +111,14 @@ class AccountHelper(act: MainActivity) {
                         }
 
 
+                    }
+                    else if (task.exception is FirebaseAuthInvalidUserException){
+                         val exception = task.exception as FirebaseAuthInvalidUserException
+                        Log.d("MyLog", "sign In With Email Exeption4:: ${exception.errorCode}")
+                        if (exception.errorCode == FireBaseConstants.ERROR_USER_NOT_FOUND)
+                        {
+                            Toast.makeText(act,FireBaseConstants.ERROR_USER_NOT_FOUND,Toast.LENGTH_SHORT).show()
+                        }
                     }
                 }
             }
@@ -151,6 +160,10 @@ class AccountHelper(act: MainActivity) {
             signInClient.signInIntent //отпрапляем интент и ждем ответ под номером sigbInRequestCode .результат нам вернет наш аккаунт
         act.startActivityForResult(intent, GoogleAccConst.GOOGLE_SIGN_IN_REQUEST_CODE)
         //след. шаг - получить наш аакаунт. для этого идем в mainactivity and create onActivityResult
+    }
+
+    fun SignOutGoogle() {
+        getSignInClient().signOut()
     }
 
     //вход по адресу google

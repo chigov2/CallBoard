@@ -4,11 +4,13 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.Menu
 import android.view.MenuItem
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.core.view.GravityCompat
+import chigovv.com.callboard.act.EditAdsAct
 import chigovv.com.callboard.databinding.ActivityMainBinding
 import chigovv.com.callboard.dialoghelper.DialogConst
 import chigovv.com.callboard.dialoghelper.DialogHelper
@@ -38,9 +40,24 @@ class MainActivity : AppCompatActivity(),NavigationView.OnNavigationItemSelected
         super.onCreate(savedInstanceState)
         // initialization of var
         rootElement = ActivityMainBinding.inflate(layoutInflater)
-        //val view = rootElement.root
-        setContentView(rootElement.root)
+        val view = rootElement.root
+        setContentView(view)
         init()
+    }
+    //прослушиваем меню main_menu new ads from the right и открываем EditAdsAct
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        if (item.itemId == R.id.new_ads){
+            //Запуск нового activity
+            val i = Intent(this,EditAdsAct::class.java)
+            startActivity(i)
+        }
+        return super.onOptionsItemSelected(item)
+    }
+
+    //создание \ подключение main menu (new button)
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.main_menu,menu)
+        return super.onCreateOptionsMenu(menu)
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -70,6 +87,7 @@ class MainActivity : AppCompatActivity(),NavigationView.OnNavigationItemSelected
     }
 
     private fun init(){
+        setSupportActionBar(rootElement.mainContent.toolbar)
 
         //кнопка - необходимо создать два ресурса в string.xml и обратиться к ним яерез R.string
         val toggle = ActionBarDrawerToggle(this,rootElement.drawerLayout,rootElement.mainContent.toolbar,R.string.open,R.string.close)
@@ -103,6 +121,8 @@ class MainActivity : AppCompatActivity(),NavigationView.OnNavigationItemSelected
             R.id.ac_sign_out -> {
                 uiUpdate(null)
                 mAuth.signOut()
+                //чтобы добраться до accounthelper нужет dialoghelper
+                dialogHelper.accHelper.SignOutGoogle()
             }
         }
         //чтобы меню закрывалось после нажатия

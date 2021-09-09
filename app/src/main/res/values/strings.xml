@@ -31,7 +31,7 @@
 
 
     <!-- -->
-    <string name="link_done">Email усрешно подключен к Google аккаунту</string>
+    <string name="link_done">Email успешно подключен к Google аккаунту</string>
     <string name="link_not_done">Войдите в Google account перед регистрацией по данному email</string>
 
 </resources>
