@@ -61,8 +61,9 @@ class DialogHelper(act:MainActivity) {
          }
          else if (index  == DialogConst.SIGN_IN_STATE){
              rootDialogElement.tvSignTitle.text = act.resources.getString(R.string.ac_sign_in)
+             rootDialogElement.btSignUpIn.visibility =View.VISIBLE
              rootDialogElement.btSignUpIn.text =  act.resources.getString(R.string.sign_in_action)
-             rootDialogElement.btForgetPass.visibility =android.view.View.VISIBLE
+             rootDialogElement.btForgetPass.visibility =View.VISIBLE
          }
      }
 

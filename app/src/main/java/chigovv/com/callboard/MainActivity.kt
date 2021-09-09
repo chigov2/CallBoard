@@ -52,9 +52,9 @@ class MainActivity : AppCompatActivity(),NavigationView.OnNavigationItemSelected
                 //есть аккаунт. теперь из него надо достать токен
                 if (account !=null)
                 {
-                    Log.d("MyLog", "API error: 3")
+                    Log.d("MyLog", "API Google sign in: <-")
                     dialogHelper.accHelper.signInFirebaseWithGoogle(account.idToken)
-                    Log.d("MyLog", "API error: 5")
+                    Log.d("MyLog", "API Google sign in: ->")
                 }
 
             }catch (e:ApiException){
@@ -110,7 +110,7 @@ class MainActivity : AppCompatActivity(),NavigationView.OnNavigationItemSelected
         return true
     }
 
-    public fun uiUpdate(user:FirebaseUser?){
+    fun uiUpdate(user:FirebaseUser?){
             tvAccount.text = if (user == null){
                 resources.getString(R.string.not_reg)
             }
