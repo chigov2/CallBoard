@@ -4,14 +4,16 @@ import android.app.AlertDialog
 import android.content.Context
 import android.view.LayoutInflater
 import android.widget.SearchView
+import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import chigovv.com.callboard.R
 import chigovv.com.callboard.utils.CityHelper
 
 class DialogSpinnerHelper{
+
     //необходим\передается контескт и список для создания диалога
-    fun showSpinnerDialog(context: Context,list:ArrayList<String>){
+    fun showSpinnerDialog(context: Context,list:ArrayList<String>, tvSelection:TextView){
          val builder = AlertDialog.Builder(context)
         //прежде чем показывать builder.show() - создадим диалог
         val dialog = builder.create()
@@ -19,7 +21,7 @@ class DialogSpinnerHelper{
         //"надуваем"
         val rootView = LayoutInflater.from(context).inflate(R.layout.spinner_layout,null)
         //create adapter
-        val adapter = RcViewDialogSpinnerAdapter(context,dialog) //RcViewDialogSpinner_adapter
+        val adapter = RcViewDialogSpinnerAdapter(tvSelection,dialog) //RcViewDialogSpinner_adapter
         // search rcView
         val rcView = rootView.findViewById<RecyclerView>(R.id.rcSpView)
         // search Searchview sv

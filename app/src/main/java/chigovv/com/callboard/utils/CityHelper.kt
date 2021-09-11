@@ -37,6 +37,33 @@ object CityHelper {
         }
         return tempArray
     }
+
+    fun getAllCities(country:String, context: Context):ArrayList<String>
+    {
+        var tempArray = ArrayList<String>()
+        //попытка считать json fle from assets. чтение потока байтов
+        try {
+            //val inputStream:InputStream = context.assets.open("countriesToCities.json")
+            val inputStream:InputStream = context.assets.open("countries.json")
+            val size:Int = inputStream.available()
+            val bytesArray = ByteArray(size)
+            //узнали размер - теперь считывание
+            inputStream.read(bytesArray)
+            //теперь преобразовать в String
+            val jsonFile = String(bytesArray)
+            //превращаем всё в json
+            val jsonObject = JSONObject(jsonFile)
+            val cityNames = jsonObject.getJSONArray(country)
+
+                for (n in 0 until cityNames.length()) {
+                    tempArray.add(cityNames.getString(n))
+                }
+         } catch (e:IOException){
+
+        }
+        return tempArray
+    }
+
     //filtration
     fun filterListData(list: ArrayList<String>, searchText: String?):ArrayList<String>{
         //create temporary array

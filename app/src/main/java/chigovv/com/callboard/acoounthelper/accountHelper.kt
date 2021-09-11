@@ -99,7 +99,6 @@ class AccountHelper(act: MainActivity) {
                         Log.d("MyLog", "sign In With Email Exeption:: " + task.exception)
                         val exception = task.exception as FirebaseAuthInvalidCredentialsException
                         //Log.d("MyLog", "sign In With Email Exeption2:: ${exception.errorCode}")
-                        //Log.d("MyLog", "sign In With Email Exeption:: ${exception.errorCode}" )
 
                         if (exception.errorCode == FireBaseConstants.ERROR_INVALID_EMAIL) {
                             //здесь будем соединять gmail and e-mail
@@ -109,7 +108,6 @@ class AccountHelper(act: MainActivity) {
                         else if(exception.errorCode == FireBaseConstants.ERROR_WRONG_PASSWORD){
                             Toast.makeText(act,FireBaseConstants.ERROR_WRONG_PASSWORD,Toast.LENGTH_SHORT).show()
                         }
-
 
                     }
                     else if (task.exception is FirebaseAuthInvalidUserException){
