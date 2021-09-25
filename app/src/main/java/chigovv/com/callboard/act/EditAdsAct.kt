@@ -1,5 +1,7 @@
 package chigovv.com.callboard.act
 
+import android.R.attr
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
@@ -13,6 +15,12 @@ import chigovv.com.callboard.MainActivity
 import com.fxn.utility.PermUtil
 import android.content.pm.PackageManager
 import chigovv.com.callboard.utils.imagePicker
+import com.fxn.pix.Pix
+
+import android.R.attr.data
+
+import android.app.Activity
+import android.util.Log
 
 
 class EditAdsAct : AppCompatActivity() {
@@ -27,6 +35,21 @@ class EditAdsAct : AppCompatActivity() {
         init()
    }
 
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (resultCode == RESULT_OK && requestCode == imagePicker.REQUEST_CODE_GET_IMAGES) {
+            if (data != null)
+            {
+            val returnValue: ArrayList<String> = data.getStringArrayListExtra(Pix.IMAGE_RESULTS) as ArrayList<String>
+            //val returnValue = data.getStringArrayListExtra(Pix.IMAGE_RESULTS)
+            Log.d("MyLog","Image : ${returnValue?.get(0)}")
+            Log.d("MyLog","Image : ${returnValue?.get(1)}")
+            Log.d("MyLog","Image : ${returnValue?.get(2)}")
+            }
+
+        }
+    }
+
     override fun onRequestPermissionsResult(requestCode: Int,permissions: Array<out String>,grantResults: IntArray)
     {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
@@ -35,7 +58,8 @@ class EditAdsAct : AppCompatActivity() {
 
                 // If request is cancelled, the result arrays are empty.
                 if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    Toast.makeText(this,"Permissions is OK",Toast.LENGTH_LONG).show()
+                    imagePicker.getImages(this)
+                    //Toast.makeText(this,"Permissions is OK",Toast.LENGTH_LONG).show()
                 } else {
                     isImagesPermitionGranted = false
                     Toast.makeText(
