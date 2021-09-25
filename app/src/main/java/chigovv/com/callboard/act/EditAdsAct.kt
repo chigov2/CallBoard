@@ -43,8 +43,8 @@ class EditAdsAct : AppCompatActivity() {
             val returnValue: ArrayList<String> = data.getStringArrayListExtra(Pix.IMAGE_RESULTS) as ArrayList<String>
             //val returnValue = data.getStringArrayListExtra(Pix.IMAGE_RESULTS)
             Log.d("MyLog","Image : ${returnValue?.get(0)}")
-            Log.d("MyLog","Image : ${returnValue?.get(1)}")
-            Log.d("MyLog","Image : ${returnValue?.get(2)}")
+            //Log.d("MyLog","Image : ${returnValue?.get(1)}")
+            //Log.d("MyLog","Image : ${returnValue?.get(2)}")
             }
 
         }
@@ -58,6 +58,7 @@ class EditAdsAct : AppCompatActivity() {
 
                 // If request is cancelled, the result arrays are empty.
                 if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+
                     imagePicker.getImages(this)
                     //Toast.makeText(this,"Permissions is OK",Toast.LENGTH_LONG).show()
                 } else {
