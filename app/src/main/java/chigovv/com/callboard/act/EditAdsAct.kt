@@ -9,10 +9,16 @@ import chigovv.com.callboard.R
 import chigovv.com.callboard.databinding.ActivityEditAdsBinding
 import chigovv.com.callboard.dialog.DialogSpinnerHelper
 import chigovv.com.callboard.utils.CityHelper
+import chigovv.com.callboard.MainActivity
+import com.fxn.utility.PermUtil
+import android.content.pm.PackageManager
+import chigovv.com.callboard.utils.imagePicker
+
 
 class EditAdsAct : AppCompatActivity() {
     lateinit var rootElement:ActivityEditAdsBinding
     private var dialog = DialogSpinnerHelper()//созается объект(инстанция) класса DialogSpinnerHelper
+    private var isImagesPermitionGranted = false
 
      override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -20,6 +26,29 @@ class EditAdsAct : AppCompatActivity() {
         setContentView(rootElement.root)
         init()
    }
+
+    override fun onRequestPermissionsResult(requestCode: Int,permissions: Array<out String>,grantResults: IntArray)
+    {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        when (requestCode) {
+            PermUtil.REQUEST_CODE_ASK_MULTIPLE_PERMISSIONS -> {
+
+                // If request is cancelled, the result arrays are empty.
+                if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    Toast.makeText(this,"Permissions is OK",Toast.LENGTH_LONG).show()
+                } else {
+                    isImagesPermitionGranted = false
+                    Toast.makeText(
+                        this,
+                        "Approve permissions to open Pix ImagePicker",
+                        Toast.LENGTH_LONG
+                    ).show()
+                }
+                return
+            }
+        }
+    }
+
 
     private fun init() {
       }
@@ -48,6 +77,11 @@ class EditAdsAct : AppCompatActivity() {
         {
             Toast.makeText(this,this.resources.getString(R.string.no_country_selected),Toast.LENGTH_LONG).show()
         }
+
+    }
+
+    fun onClickGetImages(view: View){
+        imagePicker.getImages(this)
 
     }
 }
