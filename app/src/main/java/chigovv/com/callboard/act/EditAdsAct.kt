@@ -16,9 +16,7 @@ import com.fxn.utility.PermUtil
 import android.content.pm.PackageManager
 import chigovv.com.callboard.utils.imagePicker
 import com.fxn.pix.Pix
-
 import android.R.attr.data
-
 import android.app.Activity
 import android.util.Log
 import chigovv.com.callboard.fragment.FragmentCloseInterface
@@ -42,11 +40,24 @@ class EditAdsAct : AppCompatActivity(),FragmentCloseInterface {
         if (resultCode == RESULT_OK && requestCode == imagePicker.REQUEST_CODE_GET_IMAGES) {
             if (data != null)
             {
-            val returnValue: ArrayList<String> = data.getStringArrayListExtra(Pix.IMAGE_RESULTS) as ArrayList<String>
+            val returnValues: ArrayList<String> = data.getStringArrayListExtra(Pix.IMAGE_RESULTS) as ArrayList<String>
             //val returnValue = data.getStringArrayListExtra(Pix.IMAGE_RESULTS)
-            Log.d("MyLog","Image : ${returnValue?.get(0)}")
-            //Log.d("MyLog","Image : ${returnValue?.get(1)}")
-            //Log.d("MyLog","Image : ${returnValue?.get(2)}")
+            ///////////////////////
+                if (returnValues?.size > 1)
+                {
+                    rootElement.scrollViewMain.visibility = View.GONE
+                    //imagePicker.getImages(this)
+                    //проверка фрагмента
+                    val fm = supportFragmentManager.beginTransaction()
+                    fm.replace(R.id.placeHolder,imageListFragment(this,returnValues))
+                    fm.commit()
+                }
+
+                ///////////////////
+
+            //Log.d("MyLog","Image : ${returnValues?.get(0)}")
+            //Log.d("MyLog","Image : ${returnValues?.get(1)}")
+            //Log.d("MyLog","Image : ${returnValues?.get(2)}")
             }
 
         }
@@ -108,12 +119,7 @@ class EditAdsAct : AppCompatActivity(),FragmentCloseInterface {
     }
 
     fun onClickGetImages(view: View){
-        rootElement.scrollViewMain.visibility = View.GONE
-        //imagePicker.getImages(this)
-        //проверка фрагмента
-        val fm = supportFragmentManager.beginTransaction()
-        fm.replace(R.id.placeHolder,imageListFragment(this))
-        fm.commit()
+        imagePicker.getImages(this,3)
     }
 
     override fun onFragmentClose() {
