@@ -28,13 +28,13 @@ class imageListFragment(private val fragmentCloseInterface: FragmentCloseInterfa
         //to recyclerview connect layout показываем как будет располагаться
         rcView.layoutManager = LinearLayoutManager(activity)
 
-        rcView.adapter
+        rcView.adapter = adapter
 
         //temporary
         val updateList = ArrayList<SelectImageItem>()
         for (n in 0 until newList.size)
         {
-            val selectImageItem = SelectImageItem("0","0")
+            //val selectImageItem = SelectImageItem("0","0")
             //selectImageItem.copy(title = "890")
             //updateList.add(SelectImageItem(n.toString(),newList[n]))
             updateList.add(SelectImageItem(n.toString(),newList[n]))
