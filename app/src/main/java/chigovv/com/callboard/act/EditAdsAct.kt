@@ -21,9 +21,11 @@ import android.R.attr.data
 
 import android.app.Activity
 import android.util.Log
+import chigovv.com.callboard.fragment.FragmentCloseInterface
+import chigovv.com.callboard.fragment.imageListFragment
 
 
-class EditAdsAct : AppCompatActivity() {
+class EditAdsAct : AppCompatActivity(),FragmentCloseInterface {
     lateinit var rootElement:ActivityEditAdsBinding
     private var dialog = DialogSpinnerHelper()//созается объект(инстанция) класса DialogSpinnerHelper
     private var isImagesPermitionGranted = false
@@ -59,7 +61,7 @@ class EditAdsAct : AppCompatActivity() {
                 // If request is cancelled, the result arrays are empty.
                 if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
 
-                    imagePicker.getImages(this)
+                    imagePicker.getImages(this,3)
                     //Toast.makeText(this,"Permissions is OK",Toast.LENGTH_LONG).show()
                 } else {
                     isImagesPermitionGranted = false
@@ -106,7 +108,16 @@ class EditAdsAct : AppCompatActivity() {
     }
 
     fun onClickGetImages(view: View){
-        imagePicker.getImages(this)
+        rootElement.scrollViewMain.visibility = View.GONE
+        //imagePicker.getImages(this)
+        //проверка фрагмента
+        val fm = supportFragmentManager.beginTransaction()
+        fm.replace(R.id.placeHolder,imageListFragment(this))
+        fm.commit()
+    }
 
+    override fun onFragmentClose() {
+        //super.onFragmentClose()
+        rootElement.scrollViewMain.visibility = View.VISIBLE
     }
 }
