@@ -8,13 +8,15 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import chigovv.com.callboard.R
+import chigovv.com.callboard.utils.ItemTouchMoveCallback
 import kotlin.collections.ArrayList
 
-class SelectImageRVAdapter: RecyclerView.Adapter<SelectImageRVAdapter.ImageHolder>()
+class SelectImageRVAdapter: RecyclerView.Adapter<SelectImageRVAdapter.ImageHolder>(),ItemTouchMoveCallback.itemTouchAdapter
 //создаем ViewHolder - ImageHolder Придумали.
 //необходимо создать новый layout - select_image_fragment_item - отдельный итем, который будет заполнять картитнку
 {
-    private val mainArray = ArrayList<SelectImageItem>()
+    //mainArray - храниться список всех итемов
+    val mainArray = ArrayList<SelectImageItem>()
 
     class ImageHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         lateinit var tvTitle: TextView
@@ -44,6 +46,16 @@ class SelectImageRVAdapter: RecyclerView.Adapter<SelectImageRVAdapter.ImageHolde
         // mainArray передается сюда
         return mainArray.size
     }
+
+    override fun onMove(startPos: Int, targetPos: Int) {
+        //необходимо взять из mainArray позицию на которую мы хотим переместить элемент и сохранить ее
+        val targetItem = mainArray[targetPos]
+        //на данную позицию сбросить наш элемент
+        mainArray[targetPos] = mainArray[startPos]
+        mainArray[startPos] = targetItem
+        //надо сказать адаптеру, что мы поменяли местами
+        notifyItemMoved(startPos,targetPos)
+    }
     //необходимо создать фенкцию для обновления
     fun updateAdapter(newList: ArrayList<SelectImageItem>){
         //очищаем main array
@@ -53,4 +65,5 @@ class SelectImageRVAdapter: RecyclerView.Adapter<SelectImageRVAdapter.ImageHolde
         notifyDataSetChanged()
         //готовы принять все и показать в recycler view
     }
+
 }

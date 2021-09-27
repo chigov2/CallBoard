@@ -1,6 +1,7 @@
 package chigovv.com.callboard.fragment
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,6 +11,8 @@ import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import chigovv.com.callboard.R
+import chigovv.com.callboard.utils.ItemTouchMoveCallback
+
 //показывает список с картинками
 
 //и еще надо передавать список с фото
@@ -17,7 +20,8 @@ import chigovv.com.callboard.R
 class imageListFragment(private val fragmentCloseInterface: FragmentCloseInterface,private val newList:ArrayList<String>): Fragment() {
     //создаем адаптер
     val adapter = SelectImageRVAdapter()
-    val touchHelper = ItemTouchHelper()//класс перетаскиваюший элементы itemrecyclerview - нужен callback
+    val dragCallBack = ItemTouchMoveCallback(adapter)
+    val touchHelper = ItemTouchHelper(dragCallBack)//класс перетаскиваюший элементы itemrecyclerview - нужен callback
     //ндо создать данный класс
 
 
@@ -31,6 +35,7 @@ class imageListFragment(private val fragmentCloseInterface: FragmentCloseInterfa
         //здесь получаем rcview
         val rcView = view.findViewById<RecyclerView>(R.id.rcViewSelectImage)
         touchHelper.attachToRecyclerView(rcView)
+
         //здесь получаем view и из него достаем кнопку
         val bBack = view.findViewById<Button>(R.id.bBack)
         //to recyclerview connect layout показываем как будет располагаться
@@ -58,6 +63,9 @@ class imageListFragment(private val fragmentCloseInterface: FragmentCloseInterfa
     override fun onDetach() {
         super.onDetach()
         fragmentCloseInterface.onFragmentClose()
+        Log.d("MyLog", "title 0: ${adapter.mainArray[0].title}")
+        Log.d("MyLog", "title 1: ${adapter.mainArray[1].title}")
+        Log.d("MyLog", "title 2: ${adapter.mainArray[2].title}")
     }
 
 }
