@@ -6,14 +6,20 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import chigovv.com.callboard.R
+//показывает список с картинками
+
 //и еще надо передавать список с фото
 //если newList без val - не будет работать цикл временный
 class imageListFragment(private val fragmentCloseInterface: FragmentCloseInterface,private val newList:ArrayList<String>): Fragment() {
     //создаем адаптер
-    var adapter = SelectImageRVAdapter()
+    val adapter = SelectImageRVAdapter()
+    val touchHelper = ItemTouchHelper()//класс перетаскиваюший элементы itemrecyclerview - нужен callback
+    //ндо создать данный класс
+
 
     override fun onCreateView(inflater: LayoutInflater,container: ViewGroup?,savedInstanceState: Bundle?): View?
     {
@@ -22,8 +28,10 @@ class imageListFragment(private val fragmentCloseInterface: FragmentCloseInterfa
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        //здесь получаем view и из него достаем кнопку
+        //здесь получаем rcview
         val rcView = view.findViewById<RecyclerView>(R.id.rcViewSelectImage)
+        touchHelper.attachToRecyclerView(rcView)
+        //здесь получаем view и из него достаем кнопку
         val bBack = view.findViewById<Button>(R.id.bBack)
         //to recyclerview connect layout показываем как будет располагаться
         rcView.layoutManager = LinearLayoutManager(activity)
