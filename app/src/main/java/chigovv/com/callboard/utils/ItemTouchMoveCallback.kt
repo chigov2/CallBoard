@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.RecyclerView
 //этот класс должен наследоваться от itemTouchHelperCallback
 class ItemTouchMoveCallback(val adapter: itemTouchAdapter) : ItemTouchHelper.Callback()
 {//надо подключить интерфейс itemTouchAdapter
+
     override fun getMovementFlags(recyclerView: RecyclerView,viewHolder: RecyclerView.ViewHolder): Int {
        //указываем направление движения
         val dragFlag = ItemTouchHelper.UP or ItemTouchHelper.DOWN
@@ -13,7 +14,8 @@ class ItemTouchMoveCallback(val adapter: itemTouchAdapter) : ItemTouchHelper.Cal
     }
 
     override fun onMove(recyclerView: RecyclerView,viewHolder: RecyclerView.ViewHolder,target: RecyclerView.ViewHolder): Boolean
-    { //список храниться в SelectImageRVAdapter -> main Array и нужно указать этому массиву, что его элементы поменяны местами
+    { //список храниться в SelectImageRVAdapter ->
+        // main Array и нужно указать этому массиву, что его элементы поменяны местами
         // для этого необходимо создать интерфейс
         adapter.onMove(viewHolder.adapterPosition,target.adapterPosition)
         return true

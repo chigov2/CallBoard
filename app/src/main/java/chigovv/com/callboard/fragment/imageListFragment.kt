@@ -17,12 +17,15 @@ import chigovv.com.callboard.utils.ItemTouchMoveCallback
 
 //и еще надо передавать список с фото
 //если newList без val - не будет работать цикл временный
-class imageListFragment(private val fragmentCloseInterface: FragmentCloseInterface,private val newList:ArrayList<String>): Fragment() {
+class imageListFragment(private val fragmentCloseInterface: FragmentCloseInterface,
+                        private val newList:ArrayList<String>): Fragment() {
     //создаем адаптер
     val adapter = SelectImageRVAdapter()
     val dragCallBack = ItemTouchMoveCallback(adapter)
-    val touchHelper = ItemTouchHelper(dragCallBack)//класс перетаскиваюший элементы itemrecyclerview - нужен callback
+    val touchHelper = ItemTouchHelper(dragCallBack)//класс перетаскиваюший элементы
+    // - нужен callback - создаем его ItemTouchMoveCallback.kt
     //ндо создать данный класс
+    // itemrecyclerview(встроенный)
 
 
     override fun onCreateView(inflater: LayoutInflater,container: ViewGroup?,savedInstanceState: Bundle?): View?
@@ -34,6 +37,7 @@ class imageListFragment(private val fragmentCloseInterface: FragmentCloseInterfa
         super.onViewCreated(view, savedInstanceState)
         //здесь получаем rcview
         val rcView = view.findViewById<RecyclerView>(R.id.rcViewSelectImage)
+        //подключение touchHelper к  RecyclerView
         touchHelper.attachToRecyclerView(rcView)
 
         //здесь получаем view и из него достаем кнопку

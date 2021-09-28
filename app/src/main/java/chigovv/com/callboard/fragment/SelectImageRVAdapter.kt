@@ -11,9 +11,11 @@ import chigovv.com.callboard.R
 import chigovv.com.callboard.utils.ItemTouchMoveCallback
 import kotlin.collections.ArrayList
 
-class SelectImageRVAdapter: RecyclerView.Adapter<SelectImageRVAdapter.ImageHolder>(),ItemTouchMoveCallback.itemTouchAdapter
+class SelectImageRVAdapter: RecyclerView.Adapter<SelectImageRVAdapter.ImageHolder>(),
+    ItemTouchMoveCallback.itemTouchAdapter
 //создаем ViewHolder - ImageHolder Придумали.
-//необходимо создать новый layout - select_image_fragment_item - отдельный итем, который будет заполнять картитнку
+//необходимо создать новый layout - select_image_fragment_item - отдельный итем,
+// который будет заполнять картитнку
 {
     //mainArray - храниться список всех итемов
     val mainArray = ArrayList<SelectImageItem>()
