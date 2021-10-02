@@ -19,7 +19,9 @@ import com.fxn.pix.Pix
 import android.R.attr.data
 import android.app.Activity
 import android.util.Log
+import chigovv.com.callboard.adapters.ImageAdapter
 import chigovv.com.callboard.fragment.FragmentCloseInterface
+import chigovv.com.callboard.fragment.SelectImageItem
 import chigovv.com.callboard.fragment.imageListFragment
 
 
@@ -27,6 +29,10 @@ class EditAdsAct : AppCompatActivity(),FragmentCloseInterface {
     lateinit var rootElement:ActivityEditAdsBinding
     private var dialog = DialogSpinnerHelper()//созается объект(инстанция) класса DialogSpinnerHelper
     private var isImagesPermitionGranted = false
+
+    //5.1
+    private lateinit var  imageAdapter : ImageAdapter
+
 
      override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -89,6 +95,11 @@ class EditAdsAct : AppCompatActivity(),FragmentCloseInterface {
 
 
     private fun init() {
+        //5.1 12min
+        //подключаем адаптер к viewpager
+        //находим viewpager, инициализируем обязательно
+        imageAdapter = ImageAdapter()
+        rootElement.vpImages.adapter = imageAdapter
       }
 
     //создали кнопку на activity edit ads- создаем слушатель
@@ -122,8 +133,10 @@ class EditAdsAct : AppCompatActivity(),FragmentCloseInterface {
         imagePicker.getImages(this,3)
     }
 
-    override fun onFragmentClose() {
+    override fun onFragmentClose(list: ArrayList<SelectImageItem>) {
+        //при нахатии кнопки назад запускается данная функция
         //super.onFragmentClose()
         rootElement.scrollViewMain.visibility = View.VISIBLE
+        imageAdapter.update(list)
     }
 }

@@ -51,13 +51,26 @@ class SelectImageRVAdapter: RecyclerView.Adapter<SelectImageRVAdapter.ImageHolde
 
     override fun onMove(startPos: Int, targetPos: Int) {
         //необходимо взять из mainArray позицию на которую мы хотим переместить элемент и сохранить ее
-        val targetItem = mainArray[targetPos]
+        //val targetItem = mainArray[targetPos]
         //на данную позицию сбросить наш элемент
-        mainArray[targetPos] = mainArray[startPos]
-        mainArray[startPos] = targetItem
+        //mainArray[targetPos] = mainArray[startPos]
+        //mainArray[startPos] = targetItem
         //надо сказать адаптеру, что мы поменяли местами
+        val targetItem = mainArray[targetPos]
+        mainArray[targetPos] = mainArray[startPos]
+        val titleStart = mainArray[targetPos].title
+        mainArray[targetPos].title = targetItem.title
+        mainArray[startPos] = targetItem
+        mainArray[startPos].title = titleStart
+
         notifyItemMoved(startPos,targetPos)
+
     }
+
+    override fun onClear() {
+        notifyDataSetChanged()//не запустится, пока в ItemTouchCallback fun clearView() не прописать adapter.onClear()
+    }
+
     //необходимо создать фенкцию для обновления
     fun updateAdapter(newList: ArrayList<SelectImageItem>){
         //очищаем main array

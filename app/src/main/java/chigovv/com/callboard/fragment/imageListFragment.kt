@@ -65,8 +65,9 @@ class imageListFragment(private val fragmentCloseInterface: FragmentCloseInterfa
     }
 
     override fun onDetach() {
+        //сюда можно передать список adapter.mainArray и сделать апдейт адаптера
         super.onDetach()
-        fragmentCloseInterface.onFragmentClose()
+        fragmentCloseInterface.onFragmentClose(adapter.mainArray)
         Log.d("MyLog", "title 0: ${adapter.mainArray[0].title}")
         Log.d("MyLog", "title 1: ${adapter.mainArray[1].title}")
         Log.d("MyLog", "title 2: ${adapter.mainArray[2].title}")

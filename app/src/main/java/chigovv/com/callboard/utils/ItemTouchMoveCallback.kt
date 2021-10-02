@@ -35,6 +35,7 @@ class ItemTouchMoveCallback(val adapter: itemTouchAdapter) : ItemTouchHelper.Cal
 
     override fun clearView(recyclerView: RecyclerView, viewHolder: RecyclerView.ViewHolder) {
         viewHolder.itemView.alpha = 1.0f
+        adapter.onClear()
         super.clearView(recyclerView, viewHolder)
     }
 
@@ -42,6 +43,7 @@ class ItemTouchMoveCallback(val adapter: itemTouchAdapter) : ItemTouchHelper.Cal
         //создаем функцию, которая будет передавать позицию элемента, который хотим перетащить
         fun onMove(startPos:Int, targetPos: Int)
         //добавляем данный интерфейс  к SelectImageRVAdapter
+        fun onClear()//чтобы при перетаскивании обновлялся адаптер
 
     }
 }
