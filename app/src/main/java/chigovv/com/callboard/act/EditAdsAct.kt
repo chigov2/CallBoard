@@ -1,31 +1,25 @@
 package chigovv.com.callboard.act
 
-import android.R.attr
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
-import android.widget.ArrayAdapter
 import android.widget.Toast
 import chigovv.com.callboard.R
 import chigovv.com.callboard.databinding.ActivityEditAdsBinding
 import chigovv.com.callboard.dialog.DialogSpinnerHelper
 import chigovv.com.callboard.utils.CityHelper
-import chigovv.com.callboard.MainActivity
 import com.fxn.utility.PermUtil
 import android.content.pm.PackageManager
-import chigovv.com.callboard.utils.imagePicker
+import chigovv.com.callboard.utils.ImagePicker
 import com.fxn.pix.Pix
-import android.R.attr.data
-import android.app.Activity
-import android.util.Log
 import chigovv.com.callboard.adapters.ImageAdapter
 import chigovv.com.callboard.fragment.FragmentCloseInterface
-import chigovv.com.callboard.fragment.SelectImageItem
-import chigovv.com.callboard.fragment.imageListFragment
+import chigovv.com.callboard.fragment.ImageListFragment
 
 
 class EditAdsAct : AppCompatActivity(),FragmentCloseInterface {
+    private var chooseImageFragment : ImageListFragment? = null
     lateinit var rootElement:ActivityEditAdsBinding
     private var dialog = DialogSpinnerHelper()//созается объект(инстанция) класса DialogSpinnerHelper
     private var isImagesPermitionGranted = false
@@ -43,27 +37,20 @@ class EditAdsAct : AppCompatActivity(),FragmentCloseInterface {
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        if (resultCode == RESULT_OK && requestCode == imagePicker.REQUEST_CODE_GET_IMAGES) {
+        if (resultCode == RESULT_OK && requestCode == ImagePicker.REQUEST_CODE_GET_IMAGES) {
+
             if (data != null)
             {
             val returnValues: ArrayList<String> = data.getStringArrayListExtra(Pix.IMAGE_RESULTS) as ArrayList<String>
-            //val returnValue = data.getStringArrayListExtra(Pix.IMAGE_RESULTS)
-            ///////////////////////
-                if (returnValues?.size > 1)
+
+                if (returnValues?.size > 1 && chooseImageFragment == null)
                 {
-                    rootElement.scrollViewMain.visibility = View.GONE
-                    //imagePicker.getImages(this)
-                    //проверка фрагмента
-                    val fm = supportFragmentManager.beginTransaction()
-                    fm.replace(R.id.placeHolder,imageListFragment(this,returnValues))
-                    fm.commit()
+                    openChooseImageFragment(returnValues)
                 }
-
-                ///////////////////
-
-            //Log.d("MyLog","Image : ${returnValues?.get(0)}")
-            //Log.d("MyLog","Image : ${returnValues?.get(1)}")
-            //Log.d("MyLog","Image : ${returnValues?.get(2)}")
+                else if (chooseImageFragment != null){
+                    //Надо только обновить адаптер fun updateAdapter -> ImageListFragment.kt
+                    chooseImageFragment?.updateAdapter(returnValues)
+                }
             }
 
         }
@@ -78,7 +65,7 @@ class EditAdsAct : AppCompatActivity(),FragmentCloseInterface {
                 // If request is cancelled, the result arrays are empty.
                 if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
 
-                    imagePicker.getImages(this,3)
+                    ImagePicker.getImages(this,3)
                     //Toast.makeText(this,"Permissions is OK",Toast.LENGTH_LONG).show()
                 } else {
                     isImagesPermitionGranted = false
@@ -130,13 +117,29 @@ class EditAdsAct : AppCompatActivity(),FragmentCloseInterface {
     }
 
     fun onClickGetImages(view: View){
-        imagePicker.getImages(this,3)
+        if (imageAdapter.mainArray.size == 0) //если не фото
+        {
+            ImagePicker.getImages(this, 3)
+        }
+        else
+        {                                           //если есть фото
+            openChooseImageFragment(imageAdapter.mainArray)
+        }
     }
 
-    override fun onFragmentClose(list: ArrayList<SelectImageItem>) {
+    override fun onFragmentClose(list: ArrayList<String>) {
         //при нахатии кнопки назад запускается данная функция
         //super.onFragmentClose()
         rootElement.scrollViewMain.visibility = View.VISIBLE
         imageAdapter.update(list)
+        chooseImageFragment = null
+    }
+    private fun openChooseImageFragment(newlist: ArrayList<String>)
+    {
+        chooseImageFragment = ImageListFragment(this,newlist)
+        rootElement.scrollViewMain.visibility = View.GONE
+        val fm = supportFragmentManager.beginTransaction()
+        fm.replace(R.id.placeHolder, chooseImageFragment!!)
+        fm.commit()
     }
 }

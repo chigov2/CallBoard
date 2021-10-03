@@ -1,5 +1,6 @@
 package chigovv.com.callboard.fragment
 
+import android.content.Context
 import android.net.Uri
 import android.view.LayoutInflater
 import android.view.View
@@ -18,26 +19,13 @@ class SelectImageRVAdapter: RecyclerView.Adapter<SelectImageRVAdapter.ImageHolde
 // который будет заполнять картитнку
 {
     //mainArray - храниться список всех итемов
-    val mainArray = ArrayList<SelectImageItem>()
+    val mainArray = ArrayList<String>()
 
-    class ImageHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        lateinit var tvTitle: TextView
-        lateinit var image: ImageView
-        //создать класс, передавать ссылку и титл, т.е. создать элемент, который будет содеджать эти два элемента SelectImageItem.kt = data class
-        fun setData(item: SelectImageItem)
-        {
-            tvTitle = itemView.findViewById(R.id.tvTitle)
-            image = itemView.findViewById(R.id.imageContent)
-            //нашли - теперь можем заполнять
-            tvTitle.text = item.title
-            image.setImageURI(Uri.parse(item.imageUri))
-        }
 
-    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ImageHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.select_image_fragment_item,parent,false)
-        return ImageHolder(view)
+        return ImageHolder(view, parent.context)
     }
 
     override fun onBindViewHolder(holder: ImageHolder, position: Int) {
@@ -50,19 +38,10 @@ class SelectImageRVAdapter: RecyclerView.Adapter<SelectImageRVAdapter.ImageHolde
     }
 
     override fun onMove(startPos: Int, targetPos: Int) {
-        //необходимо взять из mainArray позицию на которую мы хотим переместить элемент и сохранить ее
-        //val targetItem = mainArray[targetPos]
-        //на данную позицию сбросить наш элемент
-        //mainArray[targetPos] = mainArray[startPos]
-        //mainArray[startPos] = targetItem
-        //надо сказать адаптеру, что мы поменяли местами
+
         val targetItem = mainArray[targetPos]
         mainArray[targetPos] = mainArray[startPos]
-        val titleStart = mainArray[targetPos].title
-        mainArray[targetPos].title = targetItem.title
         mainArray[startPos] = targetItem
-        mainArray[startPos].title = titleStart
-
         notifyItemMoved(startPos,targetPos)
 
     }
@@ -71,12 +50,28 @@ class SelectImageRVAdapter: RecyclerView.Adapter<SelectImageRVAdapter.ImageHolde
         notifyDataSetChanged()//не запустится, пока в ItemTouchCallback fun clearView() не прописать adapter.onClear()
     }
 
+    class ImageHolder(itemView: View,val context: Context) : RecyclerView.ViewHolder(itemView) {
+        lateinit var tvTitle: TextView
+        lateinit var image: ImageView
+        //создать класс, передавать ссылку и титл, т.е. создать элемент, который будет содеджать эти два элемента SelectImageItem.kt = data class
+        fun setData(item: String)
+        {
+            tvTitle = itemView.findViewById(R.id.tvTitle)
+            image = itemView.findViewById(R.id.imageContent)
+            //нашли - теперь можем заполнять
+            tvTitle.text = context.resources.getStringArray(R.array.title_array)[adapterPosition]
+            image.setImageURI(Uri.parse(item))
+        }
+
+    }
+
     //необходимо создать фенкцию для обновления
-    fun updateAdapter(newList: ArrayList<SelectImageItem>){
-        //очищаем main array
-        mainArray.clear()
+    fun updateAdapter(newList: ArrayList<String>, needClear : Boolean){
+        if (needClear == true)
+        {//очищаем main array
+            mainArray. clear()
+        }
         mainArray.addAll(newList)
-        //чтобы обнулился
         notifyDataSetChanged()
         //готовы принять все и показать в recycler view
     }
