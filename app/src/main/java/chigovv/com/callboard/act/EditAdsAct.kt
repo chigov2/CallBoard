@@ -45,12 +45,16 @@ class EditAdsAct : AppCompatActivity(),FragmentCloseInterface {
             {
             val returnValues: ArrayList<String> = data.getStringArrayListExtra(Pix.IMAGE_RESULTS) as ArrayList<String>
 
-                if (returnValues?.size > 1 && chooseImageFragment == null)
+                if (returnValues?.size > 1 && chooseImageFragment == null)//если размер больше 1 и не открыт новый фрагмент
                 {
-                    openChooseImageFragment(returnValues)
+                    openChooseImageFragment(returnValues)//запускам фрагмент
+                }
+                else if (returnValues.size == 1 && chooseImageFragment == null){
+                    imageAdapter.update(returnValues)
+
                 }
                 else if (chooseImageFragment != null){
-                    //Надо только обновить адаптер fun updateAdapter -> ImageListFragment.kt
+
                     chooseImageFragment?.updateAdapter(returnValues)
                 }
             }
