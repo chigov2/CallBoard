@@ -30,6 +30,7 @@
     <string name="send_verification_done">На Вашу почту отправлена ссылка для подтверждения e-mail</string>
 
 
+
     <!-- -->
     <string name="link_done">Email успешно подключен к Google аккаунту</string>
     <string name="link_not_done">Войдите в Google account перед регистрацией по данному email</string>

@@ -11,6 +11,7 @@ import chigovv.com.callboard.dialog.DialogSpinnerHelper
 import chigovv.com.callboard.utils.CityHelper
 import com.fxn.utility.PermUtil
 import android.content.pm.PackageManager
+import android.util.Log
 import chigovv.com.callboard.utils.ImagePicker
 import com.fxn.pix.Pix
 import chigovv.com.callboard.adapters.ImageAdapter
@@ -23,6 +24,7 @@ class EditAdsAct : AppCompatActivity(),FragmentCloseInterface {
     lateinit var rootElement:ActivityEditAdsBinding
     private var dialog = DialogSpinnerHelper()//созается объект(инстанция) класса DialogSpinnerHelper
     private var isImagesPermitionGranted = false
+    var editImagePos = 0
 
     //5.1
     private lateinit var  imageAdapter : ImageAdapter
@@ -54,6 +56,17 @@ class EditAdsAct : AppCompatActivity(),FragmentCloseInterface {
             }
 
         }
+        else if (resultCode == RESULT_OK && requestCode == ImagePicker.REQUEST_CODE_GET_SINGLE_IMAGE)
+        {
+            if (data != null)
+            {
+                val uris: ArrayList<String> = data.getStringArrayListExtra(Pix.IMAGE_RESULTS) as ArrayList<String>
+                //val uris = data.getStringArrayListExtra(Pix.IMAGE_RESULTS)
+                chooseImageFragment?.setSingleImage(uris?.get(0)!!, editImagePos)
+                Log.d("MyLog","${editImagePos}")
+            }
+
+        }
     }
 
     override fun onRequestPermissionsResult(requestCode: Int,permissions: Array<out String>,grantResults: IntArray)
@@ -65,7 +78,7 @@ class EditAdsAct : AppCompatActivity(),FragmentCloseInterface {
                 // If request is cancelled, the result arrays are empty.
                 if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
 
-                    ImagePicker.getImages(this,3)
+                    ImagePicker.getImages(this,3,ImagePicker.REQUEST_CODE_GET_IMAGES)
                     //Toast.makeText(this,"Permissions is OK",Toast.LENGTH_LONG).show()
                 } else {
                     isImagesPermitionGranted = false
@@ -119,7 +132,7 @@ class EditAdsAct : AppCompatActivity(),FragmentCloseInterface {
     fun onClickGetImages(view: View){
         if (imageAdapter.mainArray.size == 0) //если не фото
         {
-            ImagePicker.getImages(this, 3)
+            ImagePicker.getImages(this, 3, ImagePicker.REQUEST_CODE_GET_IMAGES)
         }
         else
         {                                           //если есть фото

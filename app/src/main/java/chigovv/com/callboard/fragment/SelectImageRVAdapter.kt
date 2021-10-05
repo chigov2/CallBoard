@@ -2,13 +2,18 @@ package chigovv.com.callboard.fragment
 
 import android.content.Context
 import android.net.Uri
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
 import chigovv.com.callboard.R
+import chigovv.com.callboard.act.EditAdsAct
+import chigovv.com.callboard.utils.ImagePicker
 import chigovv.com.callboard.utils.ItemTouchMoveCallback
 import kotlin.collections.ArrayList
 
@@ -43,7 +48,6 @@ class SelectImageRVAdapter: RecyclerView.Adapter<SelectImageRVAdapter.ImageHolde
         mainArray[targetPos] = mainArray[startPos]
         mainArray[startPos] = targetItem
         notifyItemMoved(startPos,targetPos)
-
     }
 
     override fun onClear() {
@@ -53,11 +57,20 @@ class SelectImageRVAdapter: RecyclerView.Adapter<SelectImageRVAdapter.ImageHolde
     class ImageHolder(itemView: View,val context: Context) : RecyclerView.ViewHolder(itemView) {
         lateinit var tvTitle: TextView
         lateinit var image: ImageView
+        lateinit var imEditImage: ImageButton
         //создать класс, передавать ссылку и титл, т.е. создать элемент, который будет содеджать эти два элемента SelectImageItem.kt = data class
         fun setData(item: String)
         {
             tvTitle = itemView.findViewById(R.id.tvTitle)
             image = itemView.findViewById(R.id.imageContent)
+            imEditImage = itemView.findViewById(R.id.imEditImage)
+
+            imEditImage.setOnClickListener {
+                ImagePicker.getImages(context as EditAdsAct, 1,ImagePicker.REQUEST_CODE_GET_SINGLE_IMAGE)
+                context.editImagePos = adapterPosition
+                //Log.d("MyLog","${context.editImagePos}")
+            }
+
             //нашли - теперь можем заполнять
             tvTitle.text = context.resources.getStringArray(R.array.title_array)[adapterPosition]
             image.setImageURI(Uri.parse(item))

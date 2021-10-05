@@ -3,6 +3,7 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Android_Kotlin_prj/0_Java_basic_lessons/CallBoard/app/src/main/res/layout/select_image_fragment_item.xml" value="0.33" />
         <entry key="..\:/Android_Kotlin_prj/CallBoard 3/app/src/main/res/layout/activity_edit_ads.xml" value="0.1" />
         <entry key="..\:/Android_Kotlin_prj/CallBoard 3/app/src/main/res/layout/list_image_fragment.xml" value="0.22314814814814815" />
         <entry key="..\:/Android_Kotlin_prj/CallBoard 3/app/src/main/res/layout/select_image_fragment_item.xml" value="0.8" />
@@ -18,7 +19,7 @@
       </map>
     </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="1.8" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" project-jdk-name="1.8" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
   <component name="ProjectType">
