@@ -18,6 +18,10 @@ import chigovv.com.callboard.utils.ImageManager
 import chigovv.com.callboard.utils.ImagePicker
 import chigovv.com.callboard.utils.ItemTouchMoveCallback
 import chigovv.com.callboard.utils.ImagePicker.getImages
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.launch
 
 
 //показывает список с картинками
@@ -30,6 +34,7 @@ class ImageListFragment(private val fragmentCloseInterface: FragmentCloseInterfa
     lateinit var rootElement : ListImageFragmentBinding                      //от list_image_fragment
     //создаем адаптер
     val adapter = SelectImageRVAdapter()
+    private lateinit var job: Job
     val dragCallBack = ItemTouchMoveCallback(adapter)
     val touchHelper = ItemTouchHelper(dragCallBack)//класс перетаскиваюший элементы
     // - нужен callback - создаем его ItemTouchMoveCallback.kt
@@ -58,7 +63,13 @@ class ImageListFragment(private val fragmentCloseInterface: FragmentCloseInterfa
 
         rootElement.rcViewSelectImage.adapter = adapter
 
-        ImageManager.imageResize(newList)
+        //т.к. imageResize стала suspend coroutine здесь
+        //ImageManager.imageResize(newList)
+
+        job = CoroutineScope(Dispatchers.Main).launch{
+            val text = ImageManager.imageResize(newList)
+            Log.d("MyLog","result: ${text}")
+        }
         //in updateAdapter передаем updateList
         //adapter.updateAdapter(newList,true)
 
@@ -71,6 +82,7 @@ class ImageListFragment(private val fragmentCloseInterface: FragmentCloseInterfa
         //сюда можно передать список adapter.mainArray и сделать апдейт адаптера
         super.onDetach()
         fragmentCloseInterface.onFragmentClose(adapter.mainArray)
+        job.cancel()
 
     }
 

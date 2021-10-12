@@ -5,6 +5,9 @@ import android.util.Log
 import androidx.exifinterface.media.ExifInterface
 
 import chigovv.com.callboard.R
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.withContext
 import java.io.File
 
 object ImageManager {
@@ -45,7 +48,7 @@ object ImageManager {
     }
 
     //будем в нее передавать ссылки картинок uri
-    fun imageResize(uris: List<String>)
+    suspend fun imageResize(uris: List<String>): String = withContext(Dispatchers.IO)
     {
         val tempList = ArrayList<List<Int>>()//массив из массива из дввх элементов
         for (n in uris.indices)
@@ -75,8 +78,10 @@ object ImageManager {
                 }
             }
             Log.d("MyLog","width = ${tempList[n][WIDTH]} height = ${tempList[n][HEIGHT]}")
-            //Log.d("MyLog","Ratio = ${imageRatio}")
+
         }
+        delay(5000)
+        return@withContext "Done!!!"
     }
 }
 
