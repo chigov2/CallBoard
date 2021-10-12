@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView
 import chigovv.com.callboard.R
 import chigovv.com.callboard.R.id
 import chigovv.com.callboard.databinding.ListImageFragmentBinding
+import chigovv.com.callboard.utils.ImageManager
 import chigovv.com.callboard.utils.ImagePicker
 import chigovv.com.callboard.utils.ItemTouchMoveCallback
 import chigovv.com.callboard.utils.ImagePicker.getImages
@@ -57,9 +58,9 @@ class ImageListFragment(private val fragmentCloseInterface: FragmentCloseInterfa
 
         rootElement.rcViewSelectImage.adapter = adapter
 
-
+        ImageManager.imageResize(newList)
         //in updateAdapter передаем updateList
-        adapter.updateAdapter(newList,true)
+        //adapter.updateAdapter(newList,true)
 
         //
         //пока ничего не будет видно
