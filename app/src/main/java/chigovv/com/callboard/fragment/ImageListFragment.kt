@@ -1,5 +1,6 @@
 package chigovv.com.callboard.fragment
 
+import android.graphics.Bitmap
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -29,12 +30,12 @@ import kotlinx.coroutines.launch
 //и еще надо передавать список с фото
 //если newList без val - не будет работать цикл временный
 class ImageListFragment(private val fragmentCloseInterface: FragmentCloseInterface,
-                        private val newList:ArrayList<String>): Fragment() {
-
+                        private val newList:ArrayList<String>?): Fragment() {
+    //важно!!! newList:ArrayList<String>? -чтобы imagelistfragment мог получать null
     lateinit var rootElement : ListImageFragmentBinding                      //от list_image_fragment
     //создаем адаптер
     val adapter = SelectImageRVAdapter()
-    private lateinit var job: Job
+    private var job: Job? = null
     val dragCallBack = ItemTouchMoveCallback(adapter)
     val touchHelper = ItemTouchHelper(dragCallBack)//класс перетаскиваюший элементы
     // - нужен callback - создаем его ItemTouchMoveCallback.kt
@@ -66,23 +67,28 @@ class ImageListFragment(private val fragmentCloseInterface: FragmentCloseInterfa
         //т.к. imageResize стала suspend coroutine здесь
         //ImageManager.imageResize(newList)
 
-        job = CoroutineScope(Dispatchers.Main).launch{
-            val text = ImageManager.imageResize(newList)
-            Log.d("MyLog","result: ${text}")
+        if (newList != null){
+            job = CoroutineScope(Dispatchers.Main).launch{
+                val bitmapList = ImageManager.imageResize(newList)
+                adapter.updateAdapter(bitmapList as ArrayList<Bitmap>,true)
+            }
         }
-        //in updateAdapter передаем updateList
-        //adapter.updateAdapter(newList,true)
 
-        //
+
         //пока ничего не будет видно
         //нужно также отслеживать закрыт фрагмент или открыт - создаем fragmentCloseInterface
+    }
+
+    fun updateAdapterFromEdit(bitmapList: List<Bitmap>)
+    {
+        adapter.updateAdapter(bitmapList as ArrayList<Bitmap>,true)
     }
 
     override fun onDetach() {
         //сюда можно передать список adapter.mainArray и сделать апдейт адаптера
         super.onDetach()
         fragmentCloseInterface.onFragmentClose(adapter.mainArray)
-        job.cancel()
+        job?.cancel()
 
     }
 
@@ -114,11 +120,22 @@ class ImageListFragment(private val fragmentCloseInterface: FragmentCloseInterfa
 
     fun updateAdapter(newList: ArrayList<String>){
          //in updateAdapter передаем updateList
-        adapter.updateAdapter(newList,false)
+        job = CoroutineScope(Dispatchers.Main).launch{
+            val bitmapList = ImageManager.imageResize(newList)
+            //Log.d("MyLog","result: ${bitmapList}")
+            adapter.updateAdapter(bitmapList as ArrayList<Bitmap>,false)
+        }
     }
 
     fun setSingleImage(uri: String, pos: Int){
-        adapter.mainArray[pos] = uri
-        adapter.notifyDataSetChanged()
+        job = CoroutineScope(Dispatchers.Main).launch{
+            val bitmapList = ImageManager.imageResize(listOf(uri))
+            //Log.d("MyLog","result: ${bitmapList}")
+            //adapter.updateAdapter(bitmapList as ArrayList<Bitmap>,false)
+            adapter.mainArray[pos] = bitmapList[0]
+            adapter.notifyDataSetChanged()
+        }
+
+
     }
 }

@@ -11,6 +11,7 @@ import chigovv.com.callboard.dialog.DialogSpinnerHelper
 import chigovv.com.callboard.utils.CityHelper
 import com.fxn.utility.PermUtil
 import android.content.pm.PackageManager
+import android.graphics.Bitmap
 import android.util.Log
 import chigovv.com.callboard.utils.ImagePicker
 import com.fxn.pix.Pix
@@ -146,18 +147,19 @@ class EditAdsAct : AppCompatActivity(),FragmentCloseInterface {
         }
         else
         {                                           //если есть фото
-            openChooseImageFragment(imageAdapter.mainArray)
+            openChooseImageFragment(null)
+            chooseImageFragment?.updateAdapterFromEdit(imageAdapter.mainArray)
         }
     }
 
-    override fun onFragmentClose(list: ArrayList<String>) {
+    override fun onFragmentClose(list: ArrayList<Bitmap>) {
         //при нахатии кнопки назад запускается данная функция
         //super.onFragmentClose()
         rootElement.scrollViewMain.visibility = View.VISIBLE
         imageAdapter.update(list)
         chooseImageFragment = null
     }
-    private fun openChooseImageFragment(newlist: ArrayList<String>)
+    private fun openChooseImageFragment(newlist: ArrayList<String>?)
     {
         chooseImageFragment = ImageListFragment(this,newlist)
         rootElement.scrollViewMain.visibility = View.GONE

@@ -1,6 +1,7 @@
 package chigovv.com.callboard.fragment
 
 import android.content.Context
+import android.graphics.Bitmap
 import android.net.Uri
 import android.util.Log
 import android.view.LayoutInflater
@@ -24,7 +25,7 @@ class SelectImageRVAdapter: RecyclerView.Adapter<SelectImageRVAdapter.ImageHolde
 // который будет заполнять картитнку
 {
     //mainArray - храниться список всех итемов
-    val mainArray = ArrayList<String>()
+    val mainArray = ArrayList<Bitmap>()
 
 
 
@@ -60,7 +61,7 @@ class SelectImageRVAdapter: RecyclerView.Adapter<SelectImageRVAdapter.ImageHolde
         lateinit var imEditImage: ImageButton
         lateinit var imDeleteImage: ImageButton
         //создать класс, передавать ссылку и титл, т.е. создать элемент, который будет содеджать эти два элемента SelectImageItem.kt = data class
-        fun setData(item: String)
+        fun setData(bitMap: Bitmap)
         {
             tvTitle = itemView.findViewById(R.id.tvTitle)
             image = itemView.findViewById(R.id.imageContent)
@@ -85,13 +86,13 @@ class SelectImageRVAdapter: RecyclerView.Adapter<SelectImageRVAdapter.ImageHolde
 
             //нашли - теперь можем заполнять
             tvTitle.text = context.resources.getStringArray(R.array.title_array)[adapterPosition]
-            image.setImageURI(Uri.parse(item))
+            image.setImageBitmap(bitMap)
         }
 
     }
 
     //необходимо создать фенкцию для обновления
-    fun updateAdapter(newList: ArrayList<String>, needClear : Boolean){
+    fun updateAdapter(newList: ArrayList<Bitmap>, needClear : Boolean){
         if (needClear == true)
         {//очищаем main array
             mainArray. clear()
