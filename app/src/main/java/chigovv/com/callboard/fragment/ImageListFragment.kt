@@ -1,5 +1,6 @@
 package chigovv.com.callboard.fragment
 
+import android.app.Activity
 import android.graphics.Bitmap
 import android.os.Bundle
 import android.util.Log
@@ -7,7 +8,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.ProgressBar
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.get
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -15,6 +18,7 @@ import androidx.recyclerview.widget.RecyclerView
 import chigovv.com.callboard.R
 import chigovv.com.callboard.R.id
 import chigovv.com.callboard.databinding.ListImageFragmentBinding
+import chigovv.com.callboard.dialog.ProgressDialog
 import chigovv.com.callboard.utils.ImageManager
 import chigovv.com.callboard.utils.ImagePicker
 import chigovv.com.callboard.utils.ItemTouchMoveCallback
@@ -68,10 +72,7 @@ class ImageListFragment(private val fragmentCloseInterface: FragmentCloseInterfa
         //ImageManager.imageResize(newList)
 
         if (newList != null){
-            job = CoroutineScope(Dispatchers.Main).launch{
-                val bitmapList = ImageManager.imageResize(newList)
-                adapter.updateAdapter(bitmapList as ArrayList<Bitmap>,true)
-            }
+            resizeSelectedImages(newList,true)
         }
 
 
@@ -89,7 +90,18 @@ class ImageListFragment(private val fragmentCloseInterface: FragmentCloseInterfa
         super.onDetach()
         fragmentCloseInterface.onFragmentClose(adapter.mainArray)
         job?.cancel()
+    }
 
+    private fun resizeSelectedImages(newList: ArrayList<String>, needClear: Boolean)
+    {
+        job = CoroutineScope(Dispatchers.Main).launch{
+            val dialog = ProgressDialog.createProgressDialog(activity as Activity)
+            //теперь прогресс бар не анонимный и его можно будет закрыть
+            val bitmapList = ImageManager.imageResize(newList)
+            //закончилось сжатие картинок
+            dialog.dismiss()
+            adapter.updateAdapter(bitmapList as ArrayList<Bitmap>,needClear)
+        }
     }
 
     //настройка, инициализация tb
@@ -119,21 +131,18 @@ class ImageListFragment(private val fragmentCloseInterface: FragmentCloseInterfa
     }
 
     fun updateAdapter(newList: ArrayList<String>){
-         //in updateAdapter передаем updateList
-        job = CoroutineScope(Dispatchers.Main).launch{
-            val bitmapList = ImageManager.imageResize(newList)
-            //Log.d("MyLog","result: ${bitmapList}")
-            adapter.updateAdapter(bitmapList as ArrayList<Bitmap>,false)
-        }
+         resizeSelectedImages(newList,false)
     }
 
     fun setSingleImage(uri: String, pos: Int){
+         val pBar = rootElement.rcViewSelectImage[pos].findViewById<ProgressBar>(R.id.pBar)
         job = CoroutineScope(Dispatchers.Main).launch{
+            pBar.visibility = View.VISIBLE
             val bitmapList = ImageManager.imageResize(listOf(uri))
             //Log.d("MyLog","result: ${bitmapList}")
-            //adapter.updateAdapter(bitmapList as ArrayList<Bitmap>,false)
+            pBar.visibility = View.GONE
             adapter.mainArray[pos] = bitmapList[0]
-            adapter.notifyDataSetChanged()
+            adapter.notifyItemChanged(pos)
         }
 
 

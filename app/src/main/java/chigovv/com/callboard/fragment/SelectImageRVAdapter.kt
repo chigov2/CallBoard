@@ -9,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageButton
 import android.widget.ImageView
+import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
@@ -60,6 +61,7 @@ class SelectImageRVAdapter: RecyclerView.Adapter<SelectImageRVAdapter.ImageHolde
         lateinit var image: ImageView
         lateinit var imEditImage: ImageButton
         lateinit var imDeleteImage: ImageButton
+        lateinit var pBar: ProgressBar
         //создать класс, передавать ссылку и титл, т.е. создать элемент, который будет содеджать эти два элемента SelectImageItem.kt = data class
         fun setData(bitMap: Bitmap)
         {
@@ -67,8 +69,10 @@ class SelectImageRVAdapter: RecyclerView.Adapter<SelectImageRVAdapter.ImageHolde
             image = itemView.findViewById(R.id.imageContent)
             imEditImage = itemView.findViewById(R.id.imEditImage)
             imDeleteImage = itemView.findViewById(R.id.imDelete)
+            pBar = itemView.findViewById(R.id.pBar)
 
             imEditImage.setOnClickListener {
+               // pBar.visibility = View.VISIBLE
                 ImagePicker.getImages(context as EditAdsAct, 1,ImagePicker.REQUEST_CODE_GET_SINGLE_IMAGE)
                 context.editImagePos = adapterPosition
                 //Log.d("MyLog","${context.editImagePos}")
