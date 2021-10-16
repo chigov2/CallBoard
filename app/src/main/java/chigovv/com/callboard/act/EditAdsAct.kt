@@ -22,14 +22,12 @@ import chigovv.com.callboard.utils.ImageManager
 
 
 class EditAdsAct : AppCompatActivity(),FragmentCloseInterface {
-    private var chooseImageFragment : ImageListFragment? = null
+    var chooseImageFragment : ImageListFragment? = null
     lateinit var rootElement:ActivityEditAdsBinding
     private var dialog = DialogSpinnerHelper()//созается объект(инстанция) класса DialogSpinnerHelper
-    private var isImagesPermitionGranted = false
+    private var isImagesPermissionGranted = false
     var editImagePos = 0
-
-    //5.1
-    private lateinit var  imageAdapter : ImageAdapter
+    lateinit var  imageAdapter : ImageAdapter
 
 
      override fun onCreate(savedInstanceState: Bundle?) {
@@ -41,43 +39,7 @@ class EditAdsAct : AppCompatActivity(),FragmentCloseInterface {
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        if (resultCode == RESULT_OK && requestCode == ImagePicker.REQUEST_CODE_GET_IMAGES) {
-
-            if (data != null)
-            {
-            val returnValues: ArrayList<String> = data.getStringArrayListExtra(Pix.IMAGE_RESULTS) as ArrayList<String>
-
-                if (returnValues?.size > 1 && chooseImageFragment == null)//если размер больше 1 и не открыт новый фрагмент
-                {
-                    openChooseImageFragment(returnValues)//запускам фрагмент
-                }
-                else if (returnValues.size == 1 && chooseImageFragment == null){
-                    //imageAdapter.update(returnValues)
-                    //функция возвращает список с шириной и высотой   картинки.
-                    // На одной позиции - ширина, на другой - высота
-                    val tempList = ImageManager.getImageSize(returnValues[0])
-                    Log.d("MyLog","Image width = ${tempList[0]}")
-                    Log.d("MyLog","Image height = ${tempList[1]}")
-
-                }
-                else if (chooseImageFragment != null){
-
-                    chooseImageFragment?.updateAdapter(returnValues)
-                }
-            }
-
-        }
-        else if (resultCode == RESULT_OK && requestCode == ImagePicker.REQUEST_CODE_GET_SINGLE_IMAGE)
-        {
-            if (data != null)
-            {
-                val uris: ArrayList<String> = data.getStringArrayListExtra(Pix.IMAGE_RESULTS) as ArrayList<String>
-                //val uris = data.getStringArrayListExtra(Pix.IMAGE_RESULTS)
-                chooseImageFragment?.setSingleImage(uris?.get(0)!!, editImagePos)
-                Log.d("MyLog","${editImagePos}")
-            }
-
-        }
+        ImagePicker.showSelectedImages(resultCode,requestCode,data,this)
     }
 
     override fun onRequestPermissionsResult(requestCode: Int,permissions: Array<out String>,grantResults: IntArray)
@@ -92,7 +54,7 @@ class EditAdsAct : AppCompatActivity(),FragmentCloseInterface {
                     ImagePicker.getImages(this,3,ImagePicker.REQUEST_CODE_GET_IMAGES)
                     //Toast.makeText(this,"Permissions is OK",Toast.LENGTH_LONG).show()
                 } else {
-                    isImagesPermitionGranted = false
+                    isImagesPermissionGranted = false
                     Toast.makeText(
                         this,
                         "Approve permissions to open Pix ImagePicker",
@@ -159,7 +121,7 @@ class EditAdsAct : AppCompatActivity(),FragmentCloseInterface {
         imageAdapter.update(list)
         chooseImageFragment = null
     }
-    private fun openChooseImageFragment(newlist: ArrayList<String>?)
+    fun openChooseImageFragment(newlist: ArrayList<String>?)
     {
         chooseImageFragment = ImageListFragment(this,newlist)
         rootElement.scrollViewMain.visibility = View.GONE

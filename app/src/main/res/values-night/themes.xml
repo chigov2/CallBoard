@@ -24,4 +24,7 @@
         <!-- Убрать status bar -->
         <item name="android:windowFullscreen">true</item>
     </style>
+    <style name="ActionBarCustom" >
+        <item name="android:textColorSecondary">@color/color_green</item>
+    </style>
 </resources>
