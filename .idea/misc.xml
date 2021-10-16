@@ -25,7 +25,8 @@
         <entry key="..\:/Android_Kotlin_prj/callBoard10/CallBoard6_4/app/src/main/res/drawable/ic_new_ads.xml" value="0.23703703703703705" />
         <entry key="..\:/Android_Kotlin_prj/callBoard10/CallBoard6_4/app/src/main/res/layout/activity_edit_ads.xml" value="0.5" />
         <entry key="..\:/Android_Kotlin_prj/callBoard10/CallBoard6_4/app/src/main/res/layout/list_image_fragment.xml" value="0.3359375" />
-        <entry key="..\:/Android_Kotlin_prj/callBoard10/CallBoard6_4/app/src/main/res/layout/select_image_fragment_item.xml" value="0.75" />
+        <entry key="..\:/Android_Kotlin_prj/callBoard10/CallBoard6_4/app/src/main/res/layout/select_image_fragment_item.xml" value="0.25" />
+        <entry key="..\:/Android_Kotlin_prj/callBoard10/CallBoard6_4/app/src/main/res/menu/menu_choose_image.xml" value="0.3359375" />
       </map>
     </option>
   </component>

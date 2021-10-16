@@ -3,6 +3,7 @@ package chigovv.com.callboard.utils
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.util.Log
+import android.widget.ImageView
 import androidx.exifinterface.media.ExifInterface
 
 import chigovv.com.callboard.R
@@ -40,15 +41,18 @@ object ImageManager {
             exif.getAttributeInt(ExifInterface.TAG_ORIENTATION, ExifInterface.ORIENTATION_NORMAL)
         rotation =
             if (orientation == ExifInterface.ORIENTATION_ROTATE_90 || orientation == ExifInterface.ORIENTATION_ROTATE_270)
-            {
-                90
-            }else
-            {
-                0
-            }
+            { 90 }
+            else { 0 }
             return rotation
     }
-
+    //вертикально или горизонтально расположены картинки
+    fun chooseScaleType(im: ImageView, bitMap: Bitmap) {
+        if (bitMap.width > bitMap.height) {
+            im.scaleType = ImageView.ScaleType.CENTER_CROP
+        } else {
+            im.scaleType = ImageView.ScaleType.CENTER_INSIDE
+        }
+    }
     //будем в нее передавать ссылки картинок uri
     suspend fun imageResize(uris: List<String>): List<Bitmap> = withContext(Dispatchers.IO)
     {
