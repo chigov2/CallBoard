@@ -5,15 +5,15 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
+    <com.google.android.gms.ads.AdView
+        android:id="@+id/adView"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="image_list_fragment"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/rcViewSelectImage"
-        app:layout_constraintStart_toStartOf="@+id/rcViewSelectImage"
-        app:layout_constraintTop_toTopOf="@+id/rcViewSelectImage" />
+        app:adSize ="BANNER"
+        app:adUnitId="@string/ad_id"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tb" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rcViewSelectImage"
@@ -24,7 +24,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tb"
+        app:layout_constraintTop_toBottomOf="@+id/adView"
         app:layout_constraintVertical_bias="0.0" />
 
     <androidx.appcompat.widget.Toolbar
