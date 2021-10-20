@@ -7,8 +7,6 @@
         <entry key="..\:/Android_Kotlin_prj/CallBoard 3/app/src/main/res/layout/list_image_fragment.xml" value="0.22314814814814815" />
         <entry key="..\:/Android_Kotlin_prj/CallBoard 3/app/src/main/res/layout/select_image_fragment_item.xml" value="0.8" />
         <entry key="..\:/Android_Kotlin_prj/CallBoard6_1/app/src/main/res/layout/select_image_fragment_item.xml" value="0.21574074074074073" />
-        <entry key="..\:/Android_Kotlin_prj/CallBoard7_3/app/src/main/res/layout/activity_edit_ads.xml" value="0.5" />
-        <entry key="..\:/Android_Kotlin_prj/CallBoard7_3/app/src/main/res/layout/image_adapter_item.xml" value="0.125" />
         <entry key="..\:/Android_Kotlin_prj/callBoard10/CallBoard 3/app/src/main/res/layout/activity_edit_ads.xml" value="0.3359375" />
         <entry key="..\:/Android_Kotlin_prj/callBoard10/CallBoard 3/app/src/main/res/layout/list_image_fragment.xml" value="0.3359375" />
         <entry key="..\:/Android_Kotlin_prj/callBoard10/CallBoard 3/app/src/main/res/layout/select_image_fragment_item.xml" value="0.3359375" />
@@ -18,14 +16,18 @@
         <entry key="..\:/Android_Kotlin_prj/callBoard10/CallBoard4_3/app/src/main/res/layout/list_image_fragment.xml" value="0.33" />
         <entry key="..\:/Android_Kotlin_prj/callBoard10/CallBoard4_3/app/src/main/res/layout/select_image_fragment_item.xml" value="0.6837455830388692" />
         <entry key="..\:/Android_Kotlin_prj/callBoard10/CallBoard4_3/app/src/main/res/menu/main_choose_image.xml" value="0.67" />
+        <entry key="..\:/Android_Kotlin_prj/callBoard10/CallBoard6_4/app/src/main/res/drawable-v24/edit_image_bg_pressed.xml" value="0.3175925925925926" />
         <entry key="..\:/Android_Kotlin_prj/callBoard10/CallBoard6_4/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.23703703703703705" />
         <entry key="..\:/Android_Kotlin_prj/callBoard10/CallBoard6_4/app/src/main/res/drawable/drag.xml" value="0.23703703703703705" />
         <entry key="..\:/Android_Kotlin_prj/callBoard10/CallBoard6_4/app/src/main/res/drawable/edit_image_bg.xml" value="0.3416666666666667" />
+        <entry key="..\:/Android_Kotlin_prj/callBoard10/CallBoard6_4/app/src/main/res/drawable/edit_image_bg_normal.xml" value="0.3175925925925926" />
+        <entry key="..\:/Android_Kotlin_prj/callBoard10/CallBoard6_4/app/src/main/res/drawable/edit_image_button.xml" value="0.3175925925925926" />
         <entry key="..\:/Android_Kotlin_prj/callBoard10/CallBoard6_4/app/src/main/res/drawable/ic_add_image.xml" value="0.35625" />
         <entry key="..\:/Android_Kotlin_prj/callBoard10/CallBoard6_4/app/src/main/res/drawable/ic_delete_image.xml" value="0.23703703703703705" />
         <entry key="..\:/Android_Kotlin_prj/callBoard10/CallBoard6_4/app/src/main/res/drawable/ic_edit.xml" value="0.23703703703703705" />
         <entry key="..\:/Android_Kotlin_prj/callBoard10/CallBoard6_4/app/src/main/res/drawable/ic_new_ads.xml" value="0.23703703703703705" />
         <entry key="..\:/Android_Kotlin_prj/callBoard10/CallBoard6_4/app/src/main/res/layout/activity_edit_ads.xml" value="0.5" />
+        <entry key="..\:/Android_Kotlin_prj/callBoard10/CallBoard6_4/app/src/main/res/layout/image_adapter_item.xml" value="0.3359375" />
         <entry key="..\:/Android_Kotlin_prj/callBoard10/CallBoard6_4/app/src/main/res/layout/list_image_fragment.xml" value="0.3359375" />
         <entry key="..\:/Android_Kotlin_prj/callBoard10/CallBoard6_4/app/src/main/res/layout/select_image_fragment_item.xml" value="0.25" />
         <entry key="..\:/Android_Kotlin_prj/callBoard10/CallBoard6_4/app/src/main/res/menu/menu_choose_image.xml" value="0.3359375" />

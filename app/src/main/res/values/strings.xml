@@ -41,8 +41,14 @@
     <!--Edit activity  поиск городов...-->
     <string name="no_result">Не результатов</string>
     <string name="select_country">*Выберите страну</string>
+    <string name="country">Страна</string>
     <string name="select_city">*Выберите город</string>
+    <string name="city">Город</string>
     <string name="no_country_selected">*Не выбрана страна</string>
+    <string name="index">Индекс</string>
+    <string name="phone">Телефон</string>
+    <string name="phone_number_hint">Номер телефона</string>
+    <string name="index_hint">Индекс</string>
 
 
 
