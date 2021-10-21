@@ -47,9 +47,17 @@
     <string name="no_country_selected">*Не выбрана страна</string>
     <string name="index">Индекс</string>
     <string name="phone">Телефон</string>
-    <string name="phone_number_hint">Номер телефона</string>
-    <string name="index_hint">Индекс</string>
-
+    <string name="phone_number_hint">*Номер телефона</string>
+    <string name="index_hint">*Индекс</string>
+    <string name="description_hint">*Описание</string>
+    <string name="description">Описание</string>
+    <string name="select_category">*Выберите категорию</string>
+    <string name="category">Категория</string>
+    <string name="price_hint">*Укажите цену</string>
+    <string name="price">Цена</string>
+    <string name="with_sent">С отправкой</string>
+    <string name="with_sent2">Отправка</string>
+    <string name="publish">Опубликовать</string>
 
 
 </resources>

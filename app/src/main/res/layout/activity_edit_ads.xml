@@ -26,6 +26,7 @@
             android:orientation="vertical">
 
             <androidx.cardview.widget.CardView
+                android:id="@+id/cardImage"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_margin="3dp"
@@ -79,6 +80,7 @@
             </androidx.cardview.widget.CardView>
 
             <androidx.cardview.widget.CardView
+                android:id="@+id/cardAddress"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_margin="3dp"
@@ -99,6 +101,7 @@
                         android:layout_marginTop="5dp"
                         android:text="@string/country"
                         android:textColor="@color/color_green"
+                        android:textSize="18sp"
                         android:textStyle="bold" />
 
                     <TextView
@@ -122,7 +125,9 @@
                         android:layout_marginTop="2dp"
                         android:layout_marginEnd="4dp"
                         android:background="@color/color_green"
-                        android:orientation="horizontal"></LinearLayout>
+                        android:orientation="horizontal">
+
+                    </LinearLayout>
 
                     <TextView
                         android:id="@+id/tvTitleCity"
@@ -132,6 +137,7 @@
                         android:layout_marginTop="2dp"
                         android:text="@string/city"
                         android:textColor="@color/color_green"
+                        android:textSize="18sp"
                         android:textStyle="bold" />
 
                     <TextView
@@ -155,7 +161,9 @@
                         android:layout_marginTop="2dp"
                         android:layout_marginEnd="4dp"
                         android:background="@color/color_green"
-                        android:orientation="horizontal"></LinearLayout>
+                        android:orientation="horizontal">
+
+                    </LinearLayout>
 
                     <TextView
                         android:id="@+id/tvTitlePhone"
@@ -165,6 +173,7 @@
                         android:layout_marginTop="2dp"
                         android:text="@string/phone"
                         android:textColor="@color/color_green"
+                        android:textSize="18sp"
                         android:textStyle="bold" />
 
                     <EditText
@@ -178,7 +187,7 @@
                         android:hint="@string/phone_number_hint"
                         android:inputType="number|numberDecimal"
                         android:minHeight="35dp"
-                        android:textColorHint="@color/color_grey_dark"
+                        android:textColorHint="@color/color_grey_2dark"
                         android:textSize="16dp"
                         tools:ignore="TouchTargetSizeCheck" />
 
@@ -202,6 +211,7 @@
                         android:layout_marginTop="2dp"
                         android:text="@string/index"
                         android:textColor="@color/color_green"
+                        android:textSize="18sp"
                         android:textStyle="bold" />
 
                     <EditText
@@ -215,7 +225,7 @@
                         android:hint="@string/index_hint"
                         android:inputType="number|numberDecimal"
                         android:minHeight="35dp"
-                        android:textColorHint="@color/color_grey_dark"
+                        android:textColorHint="@color/color_grey_2dark"
                         android:textSize="16dp"
                         tools:ignore="TouchTargetSizeCheck" />
 
@@ -231,9 +241,167 @@
 
                     </LinearLayout>
 
+                    <TextView
+                        android:id="@+id/tvTitleSent"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginTop="2dp"
+                        android:layout_weight="1"
+                        android:text="@string/with_sent2"
+                        android:textColor="@color/color_green"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
+
+                    <CheckBox
+                        android:id="@+id/checkBoxWithSent"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/with_sent" />
+
+
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
 
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cardCategory"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="3dp"
+                app:cardBackgroundColor="@color/white"
+                app:cardCornerRadius="5dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginBottom="3dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/tvTitleCategory"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginTop="5dp"
+                        android:text="@string/category"
+                        android:textColor="@color/color_green"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/tvCategory"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@android:drawable/editbox_background_normal"
+                        android:minHeight="48dp"
+                        android:onClick="onClickSelectCategory"
+                        android:padding="10dp"
+                        android:text="@string/select_category"
+                        android:textColor="@color/black"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
+
+                    <LinearLayout
+                        android:id="@+id/divider6"
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginStart="4dp"
+                        android:layout_marginTop="2dp"
+                        android:layout_marginEnd="4dp"
+                        android:background="@color/color_green"
+                        android:orientation="horizontal"></LinearLayout>
+
+                    <TextView
+                        android:id="@+id/tvTitlePrice"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginTop="2dp"
+                        android:text="@string/price"
+                        android:textColor="@color/color_green"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
+
+                    <EditText
+                        android:id="@+id/etPrice"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="7dp"
+                        android:layout_marginEnd="3dp"
+                        android:background="@null"
+                        android:ems="10"
+                        android:hint="@string/price_hint"
+                        android:inputType="number|numberDecimal"
+                        android:minHeight="35dp"
+                        android:textColorHint="@color/color_grey_2dark"
+                        android:textSize="16dp"
+                        tools:ignore="TouchTargetSizeCheck" />
+
+                    <LinearLayout
+                        android:id="@+id/divider7"
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginStart="4dp"
+                        android:layout_marginTop="2dp"
+                        android:layout_marginEnd="4dp"
+                        android:background="@color/color_green"
+                        android:orientation="horizontal">
+
+                    </LinearLayout>
+
+                    <TextView
+                        android:id="@+id/tvTitleDescription"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginTop="2dp"
+                        android:text="@string/description"
+                        android:textColor="@color/color_green"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
+
+                    <EditText
+                        android:id="@+id/etDescription"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="7dp"
+                        android:layout_marginEnd="3dp"
+                        android:background="@null"
+                        android:ems="10"
+                        android:hint="@string/description_hint"
+                        android:minHeight="35dp"
+                        android:textColorHint="@color/color_grey_2dark"
+                        android:textSize="16dp"
+                        tools:ignore="TouchTargetSizeCheck" />
+
+                    <LinearLayout
+                        android:id="@+id/divider8"
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginStart="4dp"
+                        android:layout_marginTop="2dp"
+                        android:layout_marginEnd="4dp"
+                        android:background="@color/color_green"
+                        android:orientation="horizontal">
+
+                    </LinearLayout>
+
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <Button
+                android:id="@+id/btPublish"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginRight="5dp"
+                android:layout_marginBottom="10dp"
+                android:backgroundTint="@color/white"
+                android:text="@string/publish"
+                android:textColor="@color/color_green" />
+
         </LinearLayout>
     </ScrollView>
+
 </FrameLayout>
