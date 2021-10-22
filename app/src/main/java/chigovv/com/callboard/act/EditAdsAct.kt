@@ -16,6 +16,7 @@ import android.util.Log
 import chigovv.com.callboard.utils.ImagePicker
 import com.fxn.pix.Pix
 import chigovv.com.callboard.adapters.ImageAdapter
+import chigovv.com.callboard.database.DbManager
 import chigovv.com.callboard.fragment.FragmentCloseInterface
 import chigovv.com.callboard.fragment.ImageListFragment
 import chigovv.com.callboard.utils.ImageManager
@@ -134,6 +135,11 @@ class EditAdsAct : AppCompatActivity(),FragmentCloseInterface {
         val fm = supportFragmentManager.beginTransaction()
         fm.replace(R.id.placeHolder, chooseImageFragment!!)
         fm.commit()
+    }
+
+    fun onClickPublish(view: android.view.View) {
+        val dbManager = DbManager()
+        dbManager.publishAdd()
     }
 
 

@@ -1,6 +1,7 @@
 {
   "project_info": {
     "project_number": "485553158381",
+    "firebase_url": "https://callboard01-default-rtdb.europe-west1.firebasedatabase.app",
     "project_id": "callboard01",
     "storage_bucket": "callboard01.appspot.com"
   },
@@ -19,6 +20,22 @@
           "android_info": {
             "package_name": "chigovv.com.callboard",
             "certificate_hash": "6d53394411f589d8731ae7a4adc0c21e0badb316"
+          }
+        },
+        {
+          "client_id": "485553158381-8fqtohkvv1t6m4oadea1evbvts6sk6on.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "chigovv.com.callboard",
+            "certificate_hash": "89f411ed1f04bbd3397bb27b1d6eb612a1286b29"
+          }
+        },
+        {
+          "client_id": "485553158381-ec23pbar3e60ufqosbjkatdp0olf77p0.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "chigovv.com.callboard",
+            "certificate_hash": "bce251def1a1f1e42e310de66bb33498ca473601"
           }
         },
         {
