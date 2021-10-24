@@ -8,6 +8,7 @@ import com.google.firebase.ktx.Firebase
 class DbManager {
     val db = Firebase.database.getReference("main")
     val auth = Firebase.auth
+    var wer = 5
 
     fun publishAdd(add: Add)
     {
