@@ -16,6 +16,7 @@ import android.util.Log
 import chigovv.com.callboard.utils.ImagePicker
 import com.fxn.pix.Pix
 import chigovv.com.callboard.adapters.ImageAdapter
+import chigovv.com.callboard.data.Add
 import chigovv.com.callboard.database.DbManager
 import chigovv.com.callboard.fragment.FragmentCloseInterface
 import chigovv.com.callboard.fragment.ImageListFragment
@@ -29,6 +30,7 @@ class EditAdsAct : AppCompatActivity(),FragmentCloseInterface {
     private var isImagesPermissionGranted = false
     var editImagePos = 0
     lateinit var  imageAdapter : ImageAdapter
+    private val dbManager = DbManager()
 
 
      override fun onCreate(savedInstanceState: Bundle?) {
@@ -138,8 +140,24 @@ class EditAdsAct : AppCompatActivity(),FragmentCloseInterface {
     }
 
     fun onClickPublish(view: android.view.View) {
-        val dbManager = DbManager()
-        dbManager.publishAdd()
+
+        dbManager.publishAdd(fillAdd())
+    }
+
+    private fun fillAdd(): Add{
+        val add: Add
+        rootElement.apply {
+            add = Add(
+                tvCountry.text.toString(),
+                tvCity.text.toString(),
+                etPhone.text.toString(),
+                etIndex.text.toString(),
+                checkBoxWithSent.isChecked.toString(),
+                tvCategory.text.toString(),
+                etPrice.text.toString(),
+                etDescription.text.toString(), dbManager.db.push().key)
+        }
+        return add
     }
 
 
